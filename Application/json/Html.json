@@ -1,0 +1,10 @@
+{
+    "Deck_name": "Html",
+    "Deck_id": "f37538d2",
+    "cards": {
+        "br": "new  line",
+        "a": "link tag",
+        "i": "italic font",
+        "b": "bold text"
+    }
+}

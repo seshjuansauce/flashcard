@@ -1,0 +1,14 @@
+npm install -g @vue/cli
+
+npm install --save-dev eslint eslint-plugin-vue
+
+
+vue extension
+
+vue create components
+
+npm run serve
+
+
+
+npm i axios

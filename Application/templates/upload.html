@@ -1,0 +1,11 @@
+<html>
+   <body>
+      <form action = "/upload" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <label for="inputusername"><b>Deckname: </b></label> &nbsp;&nbsp;&nbsp;
+                      <input class="form-control" type="text" placeholder="deckname" name="deckname" value="{{request.form.deckname}}">
+         <input type = "submit"/>
+      </form>   
+   </body>
+</html>

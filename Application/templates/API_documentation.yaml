@@ -1,0 +1,234 @@
+openapi: 3.0.0
+info:
+  title: FLASHCARD API DOCUMENTATION
+
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /new/{User_id}/{deck_name}:
+    description: End point to Create,Update,Delete and Remove Deck with Deck parameters.
+
+    /getuserid/{Username}/{password}:
+    get:
+        description: Send this api to retrieve your userid
+        parameters:
+          - in: path
+            name: Username
+            required: true
+            schema:
+              type: string
+
+          - in: path  
+            name: password
+            required: true
+            schema:
+              type: string
+
+        responses:
+          '200':
+            description: User_id Successfully returned
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    User_id:
+                      type: string
+
+
+          '500':
+            description: Internal Server Error
+          '400':
+            description: "Error!!!: Username/password does not Exist"
+          
+                
+    
+  
+    post:
+      description: To Create new deck with this api call
+      parameters:
+        - in: path
+          name: User_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: path  
+          name: deck_name
+          required: true
+          schema:
+            type: string
+            example: Capitals
+          
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                 India:            
+                  type: string
+                  example:  Delhi
+                 China:
+                  type: string
+                  example: Beijing
+                 Russia:
+                   type: string
+                   example: Moscow
+      responses:
+      '200':
+        description: Successfuly Created Deck
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Deck_id:
+                  type: string
+                  example: 08NS79J8
+                Deck_name:
+                  type: string
+                  example: Capitals
+                cards:
+                  type: string
+                  example: { India : Delhi, China : Beijing,Russia : Moscow } 
+          
+      '500':
+        description: Internal Server Error
+      '400':
+        description: "Error!!!User Id  does not Exist"
+
+  
+        
+  
+  /update/{User_id}/{deck_id}:
+    put:
+      description: Add cards to already existing Deck using Deck_id
+      parameters:
+        - in: path
+          name: User_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: path
+          name: deck_id
+          required: true
+          schema:
+            type: string
+            example: 16f274be
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Pakistan:
+                  type: string
+                  example:  Islamabad
+              
+      responses:
+        '200':
+          description: Successfully Updated Deck
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Deck_id:
+                    type: string
+                    example: 16f274be
+                  Deck_name:
+                    type: string
+                    example: Capitals
+                  cards:
+                    type: string
+                    example:  { India : Delhi, China : Beijing,Russia : Moscow,Pakistan: Islamabad } 
+
+        '500':
+          description: Internal Server Error
+        '400':
+          description: User Id/Deck Id does not exist!! OR Error!!!  No cards in Response Body 
+          
+         
+  /remove/{User_id}/{deck_id}/{card_name}:
+    
+    put:
+      description: Remove a card from a existing deck using cardname
+      parameters:
+        - in: path
+          name: User_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: path
+          name: deck_id
+          required: true
+          schema:
+            type: string
+            example: 16f274be
+        - in: path
+          name: card_name
+          required: true
+          schema:
+            type: string
+            example: Pakistan
+         
+      
+      responses:
+        '200':
+          description: Successfully Removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Deck_id:
+                    type: string
+                    example: 16f274be
+                  Deck_name:
+                    type: string
+                    example: Capitals
+                  cards:
+                    type: string
+                    example: { India : Delhi, China : Beijing,Russia : Moscow } 
+        '404':
+          description: Card name not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: USER ID/DECK ID,this deck for this user does not exist
+          
+
+  /delete/{User_id}/{deck_id}:
+   
+    put:
+      description: Delete a existing deck.
+      parameters:
+        - in: path
+          name: User_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: path
+          name: deck_id
+          required: true
+          schema:
+            type: string
+            example: 16f274be
+    
+      responses:
+        '200':
+          description: Successfully Deleted
+   
+        '500':
+          description: Internal Server Error
+        '400':
+          description: USER ID/DECK ID,this deck for this user does not exist
+
+
+
+
